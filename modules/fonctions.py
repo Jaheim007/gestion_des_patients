@@ -1,7 +1,7 @@
 from multiprocessing.dummy import connection
 from textwrap import fill
 from tkinter import*
-from modules import page
+import page
 import json
 
 def inscription(): 
@@ -41,6 +41,6 @@ def connexion():
     Email = Label(frame, text=" Email ",font="Roboto 15").grid(row=1, column=0, sticky=E)
     Email_entry = Entry(frame).grid(row=1, column=1 ,ipadx=25, ipady=5, sticky= E) 
     
-    btn = Button(frame, text ="Se Connecter", font= "Roboto 15" ,command= page.rooms, width=10, height=2).grid(row=3, columnspan=2, sticky="N")
+    btn = Button(frame, text ="Se Connecter", font= "Roboto 15" ,command= page.form, width=10, height=2).grid(row=3, columnspan=2, sticky="N")
      
     connexion.mainloop()

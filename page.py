@@ -1,74 +1,97 @@
+from curses import window
 from tkinter import*
 import json
+from tkinter.ttk import Treeview
+from turtle import left, width
 
-def rooms():     
-    rooms = Tk()
-    rooms.title("Gestion Des Patients")
-    rooms.resizable(False, False)
-    rooms.geometry("800x800")
-    heading = Label(rooms, text="Toutes Les Chambres Des Patients", bg="skyblue", highlightbackground="black", highlightthickness= 1, font="Roboto 20").pack(pady=30, ipadx=150, ipady=10)
+def form():     
+    form = Tk()
+    form.title("Gestion Des Patients")
+    form.resizable(False, False)
+    form.geometry("1000x1000")
+    heading = Label(form, text="Formulaire D'inscription Des Patients", bg="skyblue", highlightbackground="black", highlightthickness= 1, font="Roboto 20").pack(pady=30, ipadx=150, ipady=10)
 
-    btn1 = Button(rooms, text="CHAMBRE 01", command= room1, width=15, height=2).pack(pady=40)
-    btn2 = Button(rooms, text="CHAMBRE 02", command= room2, width=15, height=2).pack(pady=45)
-    btn3 = Button(rooms, text="CHAMBRE 03", command= room3, width=15, height=2).pack(pady=35)
-    btn4 = Button(rooms, text="CHAMBRE 04", command= room4, width=15, height=2).pack(pady=35)
+    frame = Frame(form, highlightbackground= "black", highlightthickness=2)
+    frame.pack(pady=50, ipadx=100, ipady=50)
     
-    rooms.mainloop()
+    Nom = Label(frame, text=" Nom ",font="Roboto 15", justify="right").pack(pady=10)
+    nom_entry = Entry(frame).pack(pady=3)
+    Prenom = Label(frame, text=" Prenom ",font="Roboto 15").pack(pady=10)
+    prenom_entry = Entry(frame).pack(pady=3)
     
-def room1(): 
-    room1 = Tk()
-    room1.title("Gestion Des Patients")
-    room1.resizable(False, False)
-    room1.geometry("800x800")
-    heading = Label(room1, text="CHAMBRE 01", bg="skyblue", highlightbackground="black", highlightthickness= 2, font="Roboto 20").pack(pady=30, ipadx=150, ipady=10)   
+    dif_age = [
+        "0","1","2","3",
+        "4","5","6","7",
+        "8","9","10","11",
+        "12","13","14","15",
+        "16","17","18","19",
+        "20","21","22","23",
+        "24","25","26","27",
+        "28","29","30"
+    ]
     
-    frame = Frame(room1, highlightbackground="black", highlightthickness=2)
-    frame.pack(pady=50)
+    dif_doctor = [
+     "Médecins de famille",
+     "Internistes",
+     "Médecins d'urgence", 
+     "Psychiatres", 
+     "Gynécologues", 
+     "Neurologues",
+     "Radiologues",  
+     "Pédiatres", 
+     "Dentiste", 
+     "Dermatologue",
+     "Podiatres"
+    ]
     
+    dif_chambre = [
+        "Chambre 1",
+        "Chambre 2",
+        "Chambre 3",
+        "Chambre 4",
+        "Chambre 5",
+        "Chambre 6",
+    ]
     
+    drop1 = StringVar(frame) 
+    drop1.set("0")
+    age = Label(frame, text="Age",font="Roboto 15").pack(pady=10)
+    age_drop = OptionMenu(frame, drop1, *dif_age,).pack(ipadx=75, pady=5)
     
+    problème_médical = Label(frame, text="Problème Médical",font="Roboto 15").pack(pady=10)
+    problème_médical_entry = Entry(frame).pack(pady=5, ipadx=15)
     
-    btn = Button(room1, text="Nouveau patient", font="Roboto 15", width=15, height=2).pack()
-    room1.mainloop()
+    drop2 = StringVar(frame) 
+    drop2.set("Les différents médecins")
+    medecin = Label(frame, text="Médecin à voir",font="Roboto 15").pack(pady=10)
+    medecin_drop = OptionMenu(frame, drop2, *dif_doctor,).pack(ipadx=50, pady=5)
     
-def room2(): 
-    room2 = Tk()
-    room2.title("Gestion Des Patients")
-    room2.resizable(False, False)
-    room2.geometry("800x800")
-    heading = Label(room2, text="CHAMBRE 02", bg="skyblue", highlightbackground="black", highlightthickness= 2, font="Roboto 20").pack(pady=30, ipadx=150, ipady=10)   
+    drop3 = StringVar(frame) 
+    drop3.set("Chambre")
+    chambre = Label(frame, text="Salle De Repos",font="Roboto 15").pack(pady=10)
+    chambre_drop = OptionMenu(frame, drop3, *dif_chambre,).pack(ipadx=50, pady=5)
     
-    frame = Frame(room1, highlightbackground="black", highlightthickness=2)
-    frame.pack(pady=50)
-    
-    
-    btn = Button(room2, text="Nouveau patient", font="Roboto 15", width=15, height=2).pack()
-    room2.mainloop()
-    
-def room3(): 
-    room3 = Tk()
-    room3.title("Gestion Des Patients")
-    room3.resizable(False, False)
-    room3.geometry("800x800")
-    heading = Label(room3, text="CHAMBRE 03", bg="skyblue", highlightbackground="black", highlightthickness= 2, font="Roboto 20").pack(pady=30, ipadx=150, ipady=10)   
-    
-    frame = Frame(room1, highlightbackground="black", highlightthickness=2)
-    frame.pack(pady=50)
-    
-    
-    btn = Button(room3, text="Nouveau patient", font="Roboto 15", width=15, height=2).pack()
-    room3.mainloop()
-    
-def room4(): 
-    room4 = Tk()
-    room4.title("Gestion Des Patients")
-    room4.resizable(False, False)
-    room4.geometry("800x800")
-    heading = Label(room4, text="CHAMBRE 04", bg="skyblue", highlightbackground="black", highlightthickness= 2, font="Roboto 20").pack(pady=30, ipadx=150, ipady=10)   
-  
-    frame = Frame(room1, highlightbackground="black", highlightthickness=2)
-    frame.pack(pady=50)
-    
-    btn = Button(room4, text="Nouveau patient", font="Roboto 15", width=15, height=2).pack()
-    room4.mainloop()
+    btn = Button(frame, text="Enregistrer Le Patient", font="Roboto 15", command= treeview).pack(ipadx=25, pady=5, ipady=10)
 
+    form.mainloop()
+    
+def treeview():    
+    window= Tk()
+    window.title("Liste des patients")
+    # frame = Frame(tree, highlightbackground="black", highlightthickness=2)
+    # frame.pack(padx=200)
+    tree = Treeview(window, columns=('#1','#2','#3','#4','#5','#6'), height=100)
+    tree.heading('#1', text="Nom")
+    tree.heading('#2', text="Prenom")
+    tree.heading('#3', text="Age")
+    tree.heading('#4', text="Problème Médical")
+    tree.heading('#5', text="Médecin à voir")
+    tree.heading('#6', text="Salle De Repos")
+    
+    tree.column('#0', stretch=NO, width=0)
+    tree.grid()
+    treeview = tree
+    
+    window.mainloop()
+    
+    
