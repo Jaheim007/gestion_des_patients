@@ -8,11 +8,11 @@ def inscription():
     inscription = Tk()
     inscription.title("Gestion Des Patients")
     inscription.resizable(False, False)
-    inscription.geometry("500x500")
-    heading = Label(inscription, text="Page D'Inscription", bg="skyblue", highlightbackground="black", highlightthickness= 2, font="Roboto 16").pack(pady=30, ipadx=150, ipady=10)
+    inscription.geometry("700x700")
+    heading = Label(inscription, text="Page D'Inscription", bg="#144087", fg="#fff", highlightbackground="black", highlightthickness= 2, font="Roboto 16").pack(pady=50, ipadx=150, ipady=10)
     
     frame = Frame(inscription, highlightbackground="black", highlightthickness=2)
-    frame.pack(padx=70, pady=(50), anchor='w')
+    frame.pack(padx=70, pady=(50),)
 
     Nom = Label(frame, text=" Nom ",font="Roboto 15").grid(row=0, column=0, sticky=E )
     nom_entry = Entry(frame).grid(row=0, column=1, ipadx=25, ipady=5, sticky= E)
@@ -30,8 +30,8 @@ def connexion():
     connexion = Tk()
     connexion.title("Gestion Des Patients")
     connexion.resizable(False, False)
-    connexion.geometry("500x500")
-    heading1 = Label(connexion, text="Page de Connexion", bg="skyblue", highlightbackground="black", highlightthickness= 2, font="Roboto 15").pack(pady=30, ipadx=150, ipady=10)
+    connexion.geometry("700x700")
+    heading1 = Label(connexion, text="Page de Connexion", bg="#144087",fg="#fff", highlightbackground="black", highlightthickness= 2, font="Roboto 15").pack(pady=50, ipadx=150, ipady=10)
     
     frame = Frame(connexion, highlightbackground="black", highlightthickness=2)
     frame.pack(pady=50)
