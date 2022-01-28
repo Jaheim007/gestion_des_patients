@@ -1,5 +1,7 @@
 from tkinter import*
+from tkinter import messagebox
 import json
+from tkinter.ttk import Treeview
 
 def form():     
     form = Tk()
@@ -88,12 +90,63 @@ def form():
     chambre = Label(frame, text="Salle De Repos",font="Roboto 15").pack(pady=10)
     chambre_drop = OptionMenu(frame, drop4, *dif_chambre,).pack(ipadx=50, pady=5)
     
-    btn = Button(frame, text="Enregistrer Le Patient", font="Roboto 15",).pack(ipadx=25, pady=10, ipady=10)
+    def check():
+        a = nom_entry.get()
+        b = prenom_entry.get()
+        c = age_drop.get()
+        d = problème_médical_entry.get()
+        e = status_drop.get()
+        f = medecin_drop.get()
+        g = chambre_drop.get()
+        
+        print(a)
+        print(b)
+        print(c)
+        print(d)
+        print(e)
+        print(e)
+        print(f)
+        print(g)
+        
+        data = {}
+        data['Nom'] = a
+        data['Prenom'] = b
+        data['Age'] = c
+        data['Problème_médical'] = d
+        data['Statut'] = e
+        data['Medecin'] = f
+        data['Chambre'] = f
+        i = 0
+        out_file = open("data.json", "w")
+        json.dump(data, out_file)
+        tree.insert('', index='end', 
+        values =(nom_entry.get(),prenom_entry.get(),age_drop.get()
+        ,problème_médical_entry.get() ,status_drop.get() ,medecin_drop.get(),chambre_drop.get()))  
+        i = i+1
+        messagebox.showinfo('SAVED')
+        out_file.close()
+    btn = Button(frame, text="Enregistrer Le Patient", command=check,  font="Roboto 15",).pack(ipadx=25, pady=10, ipady=10)    
 
+def tree():
+    window = Tk()
+    window.title("Gestion des Stocke")
+    tree = Treeview(window, columns=('#1','#2', '#3', '#4', '#5','#6', '#7'), height=50)
+    tree.heading('#1', text="Nom")
+    tree.heading('#2', text="Prenom")
+    tree.heading('#3', text="Age")
+    tree.heading('#4', text="Problème_médical")
+    tree.heading('#5', text="Statut")
+    tree.heading('#6', text="Medecin à voir")
+    tree.heading('#7', text="Salle de Repos")
 
-    
-    
-
+    tree.column('#0', stretch=NO, width=0)
+    tree.grid()
+    treeview = tree 
+    window.mainloop()
+   
+   
+   
+        
     form.mainloop()
     
    
