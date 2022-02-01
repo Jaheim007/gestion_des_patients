@@ -90,7 +90,7 @@ def form():
     chambre = Label(frame, text="Salle De Repos",font="Roboto 15").pack(pady=10)
     chambre_drop = OptionMenu(frame, drop4, *dif_chambre,).pack(ipadx=50, pady=5)
     
-    def check():
+    """def check():
         a = nom_entry.get()
         b = prenom_entry.get()
         c = age_drop.get()
@@ -124,8 +124,8 @@ def form():
         ,problème_médical_entry.get() ,status_drop.get() ,medecin_drop.get(),chambre_drop.get()))  
         i = i+1
         messagebox.showinfo('SAVED')
-        out_file.close()
-    btn = Button(frame, text="Enregistrer Le Patient", command=check,  font="Roboto 15",).pack(ipadx=25, pady=10, ipady=10)    
+        out_file.close()"""
+    btn = Button(frame, text="Enregistrer Le Patient", font="Roboto 15",).pack(ipadx=25, pady=10, ipady=10)    
 
 def tree():
     window = Tk()
