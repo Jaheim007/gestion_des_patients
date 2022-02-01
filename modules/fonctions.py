@@ -3,6 +3,7 @@ from tkinter import*
 from tkinter import messagebox
 import page
 import json
+from test import get_data, recoding 
 
 def inscription(): 
     inscription = Tk()
@@ -29,28 +30,34 @@ def inscription():
     email_entry = Entry(frame)
     email_entry.grid(row=2, column=1, ipadx=25, ipady=5, sticky=E)
     
-    def save1():       
-        dict ={
-            "Nom": nom_entry.get(),   
-            "Prenom":prenom_entry.get(),   
-            "Email": email_entry.get()   
-        }
+    def save1():
+        liste_client = get_data()
+        print(liste_client)
         
-        with open("data.json", "a") as f:   
-            json.dump(dict,f ,indent=4)
+    
+        
+        donnes = {
+            "Nom": nom_entry.get(),
+            "Prenom": prenom_entry.get(),
+            "Email": email_entry.get()
+        }     
+        liste_client.append(donnes)
+        
+        recoding()
             
             
-        if nom_entry.get()=="" or prenom_entry.get()=="" or email_entry.get() =="":       
-            messagebox.showerror("Error", " Veuillez saisir vos informations. ")
+        if nom_entry.get() == "" or prenom_entry.get() == "" or email_entry.get() == "":       
+            messagebox.showerror("Error", "Veuillez saisir vos informations.")
             
         else:     
-            messagebox.showinfo("Info","Vous êtes inscrit" )  
+            messagebox.showinfo(" Info "," Vous êtes inscrit " )  
             
         nom_entry.delete(0,END)
         prenom_entry.delete(0,END)
         email_entry.delete(0,END)
            
-    btn = Button(frame, text="S'Inscrire",command=save1 , width=10, height=2, font="Roboto 15").grid(row=3, columnspan=2, sticky="N")
+    btn = Button(frame, text="S'Inscrire",command=save1 , width=10, height=2, font="Roboto 15")
+    btn.grid(row=3, columnspan=2, sticky="N")
     
     inscription.mainloop()
 
@@ -64,27 +71,40 @@ def connexion():
     frame = Frame(connexion, highlightbackground="black", highlightthickness=2)
     frame.pack(pady=50)
 
-    nom = Label(frame, text=" Nom ",font="Roboto 15").grid(row=0, column=0, sticky=E)
-    nom_entry = Entry(frame).grid(row=0, column=1, ipadx=25, ipady=5, sticky= E)
+    nom = Label(frame, text=" Nom ",font="Roboto 15")
+    nom.grid(row=0, column=0, sticky=E)
+    nom_entry = Entry(frame)
+    nom_entry.grid(row=0, column=1, ipadx=25, ipady=5, sticky= E)
     
-    Prenom = Label(frame, text=" Prenom ",font="Roboto 15").grid(row=1, column=0, sticky=E)
-    prenom_entry = Entry(frame).grid(row=1, column=1 ,ipadx=25, ipady=5, sticky= E) 
+    Prenom = Label(frame, text=" Prenom ",font="Roboto 15")
+    Prenom.grid(row=1, column=0, sticky=E)
+    prenom_entry = Entry(frame)
+    prenom_entry.grid(row=1, column=1 ,ipadx=25, ipady=5, sticky= E) 
     
-    Email = Label(frame, text=" Email ",font="Roboto 15").grid(row=2, column=0, sticky=E)
-    Email_entry = Entry(frame).grid(row=2, column=1 ,ipadx=25, ipady=5, sticky= E) 
+    Email = Label(frame, text=" Email ",font="Roboto 15")
+    Email.grid(row=2, column=0, sticky=E)
+    Email_entry = Entry(frame)
+    Email_entry.grid(row=2, column=1 ,ipadx=25, ipady=5, sticky= E) 
     
     def data():       
+        file="" 
         try:   
-            global dict 
+            global list
+            
             with open("data.json", "r") as f:
                 file = json.load(f)
                 
-        except json.JSONDecodeError:    
-            if nom_entry and prenom_entry and Email_entry not in file:      
+        except json.decoder.JSONDecodeError: 
+           if nom_entry and prenom_entry and Email_entry not in file:      
                 messagebox.showerror("Error", "Vous n'êtes pas inscrit.")
         
         else:           
             messagebox.showinfo("ShowInfo", "Bienvenue") 
+            
+        nom_entry.delete(0,END)
+        prenom_entry.delete(0,END)
+        Email_entry.delete(0,END)
+           
         
     btn = Button(frame, text ="Se Connecter", font= "Roboto 15" ,command=data, width=10, height=2).grid(row=3, columnspan=2, sticky="N")
      
