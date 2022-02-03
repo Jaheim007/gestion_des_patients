@@ -1,7 +1,7 @@
 from tkinter import*
 from tkinter import messagebox
-import page
 import json
+
 
 #Creation of the Sign-up page and it's different functions including the JSON File.
 def inscription(): 
@@ -36,6 +36,8 @@ def inscription():
     Email.grid(row=2, column=0, sticky= E)
     email_entry = Entry(frame)
     email_entry.grid(row=2, column=1, ipadx=25, ipady=5, sticky=E)
+    
+    
     
     #This is the function which allows me to create a JSON file and store all the different (nurse) user in the file
     
@@ -85,17 +87,18 @@ def inscription():
                 messagebox.showerror("Error", "Veuillez saisir vos informations.")
             
             else:     
-                messagebox.showinfo(" Info "," Vous êtes inscrit " )  
+                messagebox.showinfo(" Info "," Vous êtes inscrit " )
+                inscription.destroy()
             
             with open("/Users/imac-13/gestion_des_patients-1/data.json", "w") as f:
                 json.dump(liste, f, indent=4)
 
-        nom_entry.delete(0,END)
-        prenom_entry.delete(0,END)
-        email_entry.delete(0,END)
+       
+        
            
     btn = Button(frame, text="S'Inscrire", command=recoding, width=10, height=2, font="Roboto 15")
     btn.grid(row=3, columnspan=2, sticky="N")
+    
     
     inscription.mainloop()
 
@@ -135,15 +138,43 @@ def connexion():
     def data():
         with open("/Users/imac-13/gestion_des_patients-1/data.json", "r") as f:
             liste = json.load(f) 
+        
+        if nom_entry.get() == "" or prenom_entry.get() == "" or Email_entry.get() == "" :       
+            messagebox.showerror("Error", "Veuillez saisir vos informations.")
+        else: 
+            pass      
+        
+        for i in liste: 
+            for elt in i.values():
+                if nom_entry.get() in elt and prenom_entry.get() in elt and Email_entry.get() in elt:
+                    messagebox.showinfo("info", "Vous êtes connecté ")
                 
-         
+                break
+            else:
+                    messagebox.showerror("Error", "Vous n'êtes pas inscrit à ce service.")  
+                    connexion.destroy()  
+                    
+            # connexion.destroy()
+            # import page
+            # print(i.values(), '\n')
+            # if nom_entry.get() in i.values() and prenom_entry.get() in i.values() and Email_entry.get() in i.values():
+            #     print("ok")
+            #     print(i.values(), '\n')
+            # else:
+            #     print("no")
+            #     print(i.values(), '\n')
+            #     if  prenom_entry.get() in i.values():
+            #         if Email_entry.get() in i.values():
+            #             messagebox.showinfo("info", "Vous êtes connecté ")  
             
-        nom_entry.delete(0,END)
-        prenom_entry.delete(0,END)
-        Email_entry.delete(0,END)
+            # else: 
+            #     messagebox.showinfo(" Info ","  Vous n'êtes inscrit")
+           
+              
+        
            
         
-    btn = Button(frame, text ="Se Connecter", font= "Roboto 15" ,command=page.form, width=10, height=2)
+    btn = Button(frame, text ="Se Connecter", font= "Roboto 15" ,command=data, width=10, height=2)
     btn.grid(row=3, columnspan=2, sticky="N")
     
     connexion.mainloop()
