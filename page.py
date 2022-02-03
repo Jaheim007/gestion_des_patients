@@ -127,26 +127,32 @@ def form():
         with open("form.json", "a") as f:   
             json.dump(dict,f ,indent=4)
         print(dict)
-    btn= Button(frame, text="Enregistrer Le Patient", command=save, font="Roboto 15",)
-    btn.pack(ipadx=25, pady=10, ipady=10) 
+    btn= Button(frame, text="Enregistrer Le Patient", command=save, font="Roboto 15")
+    btn.pack(ipadx=25, pady=10, ipady=10)
+    
+    btn2 = Button(form, text="Voir la liste des patients", command= tree , font="Roboto 15") 
+    btn2.pack(ipadx=25, pady=10, ipady=10)
     
     form.mainloop()
     
 def tree():
     window = Tk()
     window.title("Gestion des Stocke")
+    
     tree = Treeview(window, columns=('#1','#2', '#3', '#4', '#5','#6', '#7'), height=50)
     tree.heading('#1', text="Nom")
     tree.heading('#2', text="Prenom")
     tree.heading('#3', text="Age")
-    tree.heading('#4', text="Problème_médical")
-    tree.heading('#5', text="Statut")
-    tree.heading('#6', text="Medecin à voir")
-    tree.heading('#7', text="Salle de Repos")
+    tree.heading('#4', text="Problème_médical" )
+    tree.heading('#5', text="Statut" )
+    tree.heading('#6', text="Medecin à voir" )
+    tree.heading('#7', text="Salle De Repos" )
 
     tree.column('#0', stretch=NO, width=0)
     tree.grid()
-    treeview = tree 
+    
+    btn = Button(window, text="Voir la liste des patients" ,command= form, font="Roboto 15")
+    btn.grid(ipadx=25, pady=10, ipady=10)
     window.mainloop()
    
    
