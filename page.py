@@ -1,18 +1,16 @@
 from re import I
 from tkinter import*
 from tkinter import ttk,messagebox
+import tree
 import json
 from tkinter.ttk import Treeview
 from tkinter.ttk import Combobox
 from turtle import width
-import tree
 
 # Creating the formula of inscription and update 
 def form():     
     form = Tk()
     form.title("Gestion Des Patients")
-    form.resizable(False, False)
-    form.geometry("1000x1000")
     heading = Label(form, text="Formulaire d'inscription ou mise à jour des patients", bg="#144087",fg="#fff", highlightbackground="black", highlightthickness= 1, font="Roboto 16")
     heading.pack(pady=20, ipadx=150, ipady=10)
 
@@ -162,15 +160,16 @@ def form():
         problème_médical_entry.delete(0,END)
         medecin_combo.set('')
         chambre_combo.set('')
-    
-    btn= Button(frame, text="Enregistrer Le Patient",command=save,  font="Roboto 15")
+        
+    btn= Button(frame, text="Enregistrer Le Patient",command=save,  font="Roboto 15",relief=FLAT)
     btn.pack(ipadx=25, pady=10, ipady=10)
 
-    btn2 = Button(form, text="Voir la liste des patients", command= tree.tree , font="Roboto 15") 
+    btn2 = Button(form, text="Voir la liste des patients", command=tree.tree , font="Roboto 15",relief=FLAT) 
     btn2.pack(ipadx=25, pady=5, ipady=10)
 
     form.mainloop()
         
+    
    
     
     
